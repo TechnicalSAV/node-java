@@ -1,4 +1,3 @@
-
 #include "methodCallBaton.h"
 #include "java.h"
 #include "javaObject.h"
@@ -77,7 +76,7 @@ v8::Handle<v8::Value> MethodCallBaton::resultsToV8(JNIEnv *env) {
   v8::HandleScope scope;
 
   if(m_error) {
-    v8::Handle<v8::Value> err = javaExceptionToV8(env, m_error, m_errorString);
+    v8::Handle<v8::Value> err = ThrowException(javaExceptionToV8(env, m_error, m_errorString));
     env->DeleteGlobalRef(m_error);
     return scope.Close(err);
   }
